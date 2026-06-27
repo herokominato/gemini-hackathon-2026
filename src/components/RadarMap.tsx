@@ -29,6 +29,18 @@ export default function RadarMap({
 }: RadarMapProps) {
   const [radarAngle, setRadarAngle] = useState(0);
 
+  // Find current user status ("Hero" or current client status)
+  const currentUserStatus = statuses.find(s => s.clientId === currentClientId) || 
+                            statuses.find(s => s.personaName.toLowerCase().includes('hero'));
+
+  const mapCenter = currentUserStatus 
+    ? { lat: currentUserStatus.lat, lng: currentUserStatus.lng }
+    : { lat: 35.6580, lng: 139.7016 }; // Shibuya center
+
+  const heroPct = currentUserStatus 
+    ? realToPercent(currentUserStatus.lat, currentUserStatus.lng)
+    : { x: 50, y: 50 }; // default center
+
   // Rotate the radar sweep line continuously
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,11 +51,11 @@ export default function RadarMap({
 
   // Standard locations for Tokyo neighborhoods to print as labels (fallback mode)
   const NEIGHBORHOOD_LABELS = [
-    { name: 'SHIMOKITAZAWA', x: 15, y: 35, desc: 'Vintage & Indie Hub' },
-    { name: 'YOYOGI KOEN', x: 30, y: 25, desc: 'Lush Coffee Walks' },
-    { name: 'SHIBUYA', x: 45, y: 52, desc: 'Modern Coffee Capital' },
-    { name: 'NAKAMEGURO', x: 35, y: 72, desc: 'Canalside Brewing' },
-    { name: 'EBISU', x: 75, y: 82, desc: 'Elegant Stand Culture' },
+    { name: 'SHIMOKITAZAWA', x: 15, y: 35 },
+    { name: 'YOYOGI KOEN', x: 30, y: 25 },
+    { name: 'SHIBUYA', x: 45, y: 52 },
+    { name: 'NAKAMEGURO', x: 35, y: 72 },
+    { name: 'EBISU', x: 75, y: 82 },
   ];
 
   // Map custom light styling configuration
@@ -54,48 +66,225 @@ export default function RadarMap({
     styles: [
       {
         "elementType": "geometry",
-        "stylers": [{ "color": "#FAF9F6" }]
-      },
-      {
-        "elementType": "labels.icon",
-        "stylers": [{ "visibility": "off" }]
+        "stylers": [
+          {
+            "color": "#ebe3cd"
+          }
+        ]
       },
       {
         "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#2D2926" }]
+        "stylers": [
+          {
+            "color": "#523735"
+          }
+        ]
       },
       {
         "elementType": "labels.text.stroke",
-        "stylers": [{ "color": "#FAF9F6" }]
+        "stylers": [
+          {
+            "color": "#f5f1e6"
+          }
+        ]
       },
       {
         "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#c9b2a6"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.land_parcel",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#dcd2be"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative.land_parcel",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#ae9e90"
+          }
+        ]
+      },
+      {
+        "featureType": "landscape.natural",
         "elementType": "geometry",
-        "stylers": [{ "visibility": "off" }]
+        "stylers": [
+          {
+            "color": "#dfd2ae"
+          }
+        ]
       },
       {
         "featureType": "poi",
-        "stylers": [{ "visibility": "off" }]
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#dfd2ae"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#93817c"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#a5b076"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#447530"
+          }
+        ]
       },
       {
         "featureType": "road",
         "elementType": "geometry",
-        "stylers": [{ "color": "#F2EFE9" }]
+        "stylers": [
+          {
+            "color": "#f5f1e6"
+          }
+        ]
       },
       {
         "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#2D2926" }]
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
       },
       {
-        "featureType": "water",
+        "featureType": "road.arterial",
         "elementType": "geometry",
-        "stylers": [{ "color": "#E4DCCF" }]
+        "stylers": [
+          {
+            "color": "#fdfcf8"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#f8c967"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#e9bc62"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#e98d58"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#db8555"
+          }
+        ]
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#806b63"
+          }
+        ]
+      },
+      {
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#dfd2ae"
+          }
+        ]
+      },
+      {
+        "featureType": "transit.line",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#8f7d77"
+          }
+        ]
+      },
+      {
+        "featureType": "transit.line",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#ebe3cd"
+          }
+        ]
+      },
+      {
+        "featureType": "transit.station",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#dfd2ae"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#b9d3c2"
+          }
+        ]
       },
       {
         "featureType": "water",
         "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#2D2926" }]
+        "stylers": [
+          {
+            "color": "#92998d"
+          }
+        ]
       }
     ]
   };
@@ -108,14 +297,34 @@ export default function RadarMap({
         <div className="w-full h-full relative z-0">
           <APIProvider apiKey={API_KEY} version="weekly">
             <Map
-              defaultCenter={{ lat: 35.6580, lng: 139.7016 }} // Shibuya center
+              key={currentUserStatus?.clientId || 'default'}
+              defaultCenter={mapCenter}
               defaultZoom={13}
               gestureHandling="cooperative"
               options={mapOptions}
-              mapId="DEMO_MAP_ID"
+              mapId="ce283082d31e12c959c61c2f"
               internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
               style={{ width: '100%', height: '100%' }}
             >
+              {/* Radar sweep overlay anchored on the user */}
+              <AdvancedMarker position={mapCenter}>
+                <div className="relative flex items-center justify-center pointer-events-none" style={{ transform: 'translate(-50%, -50%)' }}>
+                  {/* Concentric radar rings */}
+                  <div className="w-[120px] h-[120px] rounded-full border border-gold/30 absolute" />
+                  <div className="w-[240px] h-[240px] rounded-full border border-gold/20 absolute" />
+                  <div className="w-[360px] h-[360px] rounded-full border border-gold/15 absolute" />
+                  
+                  {/* Dynamic scanning line */}
+                  <div 
+                    className="absolute w-[450px] h-[450px] origin-center pointer-events-none"
+                    style={{ 
+                      transform: `rotate(${radarAngle}deg)`,
+                      background: 'conic-gradient(from 0deg, rgba(212, 163, 115, 0.22) 0deg, rgba(212, 163, 115, 0) 70deg, transparent 360deg)'
+                    }}
+                  />
+                </div>
+              </AdvancedMarker>
+
               {/* Verified Coffee Hangouts on Google Map */}
               {VERIFIED_HANGOUTS.map((shop) => (
                 <AdvancedMarker
@@ -197,39 +406,17 @@ export default function RadarMap({
           </APIProvider>
         </div>
       ) : (
-        /* FALLBACK HIGHLY INTERACTIVE VECTOR RADAR MAP WITH PERCENTAGES */
-        <div className="absolute inset-0 z-0">
-          {/* Blueprints grid patterns */}
-          <div className="absolute inset-0 opacity-25 pointer-events-none">
-            <div 
-              className="w-full h-full" 
-              style={{
-                backgroundImage: 'radial-gradient(#D4A373 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-              }}
-            />
-          </div>
-
-          {/* Transit Lines representing Tokyo layout */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+        /* FALLBACK MINIMALIST VECTOR MAP */
+        <div className="absolute inset-0 z-0 bg-cream">
+          {/* Clean minimalist winding river representation */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none">
             <path
-              d="M 120 40 Q 200 60 250 180 T 320 320"
+              d="M -50,160 Q 150,110 220,240 T 500,210"
               fill="none"
-              stroke="#2D2926"
-              strokeWidth="1.5"
-              strokeDasharray="4,4"
-            />
-            <path
-              d="M 20 120 C 100 120, 160 170, 250 180"
-              fill="none"
-              stroke="#D4A373"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M 120 380 Q 150 280 200 240 T 380 180"
-              fill="none"
-              stroke="#D4A373"
-              strokeWidth="0.75"
+              stroke="#E4DCCF"
+              strokeWidth="24"
+              strokeLinecap="round"
+              className="opacity-75"
             />
           </svg>
 
@@ -240,12 +427,9 @@ export default function RadarMap({
               className="absolute pointer-events-none flex flex-col items-center select-none"
               style={{ left: `${label.x}%`, top: `${label.y}%`, transform: 'translate(-50%, -50%)' }}
             >
-              <div className="w-1 h-1 rounded-full bg-espresso/30 mb-1" />
-              <span className="font-mono text-[9px] font-bold text-espresso/45 tracking-widest whitespace-nowrap">
+              <div className="w-1.5 h-1.5 rounded-full bg-espresso/25 mb-1.5" />
+              <span className="font-mono text-[9px] font-bold text-espresso/50 tracking-widest whitespace-nowrap">
                 {label.name}
-              </span>
-              <span className="font-mono text-[6px] text-espresso/30 uppercase tracking-widest whitespace-nowrap scale-90">
-                {label.desc}
               </span>
             </div>
           ))}
@@ -317,7 +501,7 @@ export default function RadarMap({
           <div className="absolute top-3 right-3 bg-espresso/90 border border-gold/30 text-gold px-2.5 py-1.5 font-mono text-[8px] max-w-[200px] leading-relaxed select-none z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.15)] flex flex-col gap-1">
             <div className="flex items-center gap-1 font-bold">
               <Sparkles className="w-3 h-3 flex-shrink-0" />
-              <span>OFFLINE RADAR ENGINE</span>
+              <span>OFFLINE MAP MODE</span>
             </div>
             <p className="text-cream/80 text-[7px]">
               Set <strong>GOOGLE_MAPS_PLATFORM_KEY</strong> in Settings (⚙️) to overlay this coffee sweep onto a real styled Google Map!
@@ -326,23 +510,27 @@ export default function RadarMap({
         </div>
       )}
 
-      {/* 2. RADAR SWEEPING VECTOR OVERLAY */}
-      {/* Centered concentric radar rings & rotating sweep line for aesthetic sci-fi social vibe */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-5">
-        {/* Concentric radar rings */}
-        <div className="w-[120px] h-[120px] rounded-full border border-gold/30" />
-        <div className="w-[240px] h-[240px] rounded-full border border-gold/20 absolute" />
-        <div className="w-[360px] h-[360px] rounded-full border border-gold/15 absolute" />
-        
-        {/* Dynamic scanning line */}
+      {/* 2. RADAR SWEEPING OVERLAY (OFFLINE/FALLBACK MODE) */}
+      {!hasValidKey && (
         <div 
-          className="absolute w-[450px] h-[450px] origin-center pointer-events-none"
-          style={{ 
-            transform: `rotate(${radarAngle}deg)`,
-            background: 'conic-gradient(from 0deg, rgba(212, 163, 115, 0.14) 0deg, rgba(212, 163, 115, 0) 70deg, transparent 360deg)'
-          }}
-        />
-      </div>
+          className="absolute pointer-events-none z-5 flex items-center justify-center"
+          style={{ left: `${heroPct.x}%`, top: `${heroPct.y}%`, transform: 'translate(-50%, -50%)' }}
+        >
+          {/* Concentric radar rings */}
+          <div className="w-[120px] h-[120px] rounded-full border border-gold/30 absolute" />
+          <div className="w-[240px] h-[240px] rounded-full border border-gold/20 absolute" />
+          <div className="w-[360px] h-[360px] rounded-full border border-gold/15 absolute" />
+          
+          {/* Dynamic scanning line */}
+          <div 
+            className="absolute w-[450px] h-[450px] origin-center pointer-events-none"
+            style={{ 
+              transform: `rotate(${radarAngle}deg)`,
+              background: 'conic-gradient(from 0deg, rgba(212, 163, 115, 0.22) 0deg, rgba(212, 163, 115, 0) 70deg, transparent 360deg)'
+            }}
+          />
+        </div>
+      )}
 
       {/* 3. RADAR SYSTEM STATUS INDICATOR */}
       <div className="absolute bottom-3 left-3 bg-cream/90 backdrop-blur-xs border-2 border-espresso text-espresso p-2.5 font-mono text-[9px] flex items-center gap-2 z-10 shadow-[4px_4px_0px_0px_rgba(45,41,38,1)]">

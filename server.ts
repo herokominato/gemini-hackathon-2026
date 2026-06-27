@@ -56,7 +56,7 @@ function initMockData() {
   activeStatuses = [
     {
       id: 'mock-status-1',
-      personaName: 'Flat White',
+      personaName: 'Hero (Flat White)',
       personaColor: '#D4A373',
       activity: 'Coffee',
       neighborhood: 'Shibuya',
@@ -72,7 +72,7 @@ function initMockData() {
     },
     {
       id: 'mock-status-2',
-      personaName: 'Cortado',
+      personaName: 'Faustin (Cortado)',
       personaColor: '#C68B59',
       activity: 'Drink',
       neighborhood: 'Shimokitazawa',
@@ -88,7 +88,7 @@ function initMockData() {
     },
     {
       id: 'mock-status-3',
-      personaName: 'Matcha Latte',
+      personaName: 'Aish (Matcha Latte)',
       personaColor: '#768959',
       activity: 'Walk',
       neighborhood: 'Yoyogi Koen',
@@ -104,7 +104,7 @@ function initMockData() {
     },
     {
       id: 'mock-status-4',
-      personaName: 'Espresso Tonic',
+      personaName: 'Tanapol (Espresso Tonic)',
       personaColor: '#5B4B3E',
       activity: 'Coffee',
       neighborhood: 'Nakameguro',
@@ -127,30 +127,30 @@ function initMockData() {
       id: 'mock-chat-1',
       statusId: 'mock-status-1',
       statusOwnerClientId: 'mock-client-1',
-      statusOwnerPersona: 'Flat White',
+      statusOwnerPersona: 'Hero (Flat White)',
       pingerClientId: 'demo-pinger-client',
-      pingerPersona: 'Cold Brew',
+      pingerPersona: 'Tanapol (Espresso Tonic)',
       locationName: 'Kurasu Tokyo',
       expiresAt: chatExp,
       messages: [
         {
           id: 'msg-1',
           senderClientId: 'mock-client-1',
-          senderPersona: 'Flat White',
+          senderPersona: 'Hero (Flat White)',
           text: 'Hey! Glad you pinged. I am sitting on the wood bench right outside.',
           createdAt: new Date(now.getTime() - 5 * 60 * 1000).toISOString()
         },
         {
           id: 'msg-2',
           senderClientId: 'demo-pinger-client',
-          senderPersona: 'Cold Brew',
+          senderPersona: 'Tanapol (Espresso Tonic)',
           text: 'Awesome! Just walking over from Harajuku station now, be there in 5m.',
           createdAt: new Date(now.getTime() - 4 * 60 * 1000).toISOString()
         },
         {
           id: 'msg-3',
           senderClientId: 'mock-client-1',
-          senderPersona: 'Flat White',
+          senderPersona: 'Hero (Flat White)',
           text: 'Perfect, see you soon! I have a black baseball cap on.',
           createdAt: new Date(now.getTime() - 3 * 60 * 1000).toISOString()
         }

@@ -124,51 +124,40 @@ export interface Persona {
   avatarUrl: string;
 }
 
+/**
+ * -------------------------------------------------------------
+ * HOW TO REPLACE WITH YOUR OWN PEOPLE:
+ * 
+ * You can replace this array with your own list of persons!
+ * If you uploaded photos to a GitHub repository, you can reference them 
+ * directly using the raw GitHub URL format:
+ * 
+ * "https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>/<BRANCH>/<PATH_TO_IMAGE>"
+ * 
+ * Example:
+ *   "https://raw.githubusercontent.com/hero-aimovie/yorimichi/main/assets/person1.png"
+ * -------------------------------------------------------------
+ */
 export const COFFEE_PERSONAS: Persona[] = [
   {
-    name: 'Flat White',
+    name: 'Hero (Flat White)',
     color: '#D4A373',
-    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80'
+    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/hero.png'
   },
   {
-    name: 'Cortado',
+    name: 'Faustin (Cortado)',
     color: '#C68B59',
-    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80'
+    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/Faustin.webp'
   },
   {
-    name: 'Espresso Tonic',
+    name: 'Tanapol (Espresso Tonic)',
     color: '#5B4B3E',
-    avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80'
+    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/Tanapol.webp'
   },
   {
-    name: 'Matcha Latte',
+    name: 'Aish (Matcha Latte)',
     color: '#768959',
-    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80'
-  },
-  {
-    name: 'Cold Brew',
-    color: '#2D2926',
-    avatarUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=150&h=150&q=80'
-  },
-  {
-    name: 'Macchiato',
-    color: '#E4B383',
-    avatarUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80'
-  },
-  {
-    name: 'Dirty Chai',
-    color: '#A0522D',
-    avatarUrl: 'https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=150&h=150&q=80'
-  },
-  {
-    name: 'Affogato',
-    color: '#8B5A2B',
-    avatarUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&h=150&q=80'
-  },
-  {
-    name: 'V60 Drip',
-    color: '#CD853F',
-    avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&h=150&q=80'
+    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/aish.webp'
   }
 ];
 

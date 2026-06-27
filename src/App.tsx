@@ -14,7 +14,7 @@ import { UserStatus, ChatRoom, CoffeeShop } from './types';
 export default function App() {
   // Client state
   const [clientId, setClientId] = useState('');
-  const [currentPersona, setCurrentPersona] = useState({ name: 'Flat White', color: '#D4A373' });
+  const [currentPersona, setCurrentPersona] = useState({ name: 'Hero (Flat White)', color: '#D4A373' });
   const [showPersonaSelector, setShowPersonaSelector] = useState(false);
 
   // Core navigation: 'radar' | 'hangouts' | 'chats'
