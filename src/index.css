@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --color-espresso: #2D2926;
+  --color-cream: #FAF9F6;
+  --color-oat: #F2EFE9;
+  --color-gold: #D4A373;
+  --color-matcha: #768959;
+}
+
+/* Base custom styles to enforce our Clean Minimalism modern layout */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-espresso);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.editorial {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+.industrial {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+/* Smooth custom scrollbars for mobile feel */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+}

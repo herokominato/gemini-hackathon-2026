@@ -1,0 +1,6 @@
+{
+  "name": "Yorimichi",
+  "description": "A mobile-optimized spontaneous social compass for Tokyo expats to connect in real-time at modern coffee shops.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
