@@ -437,17 +437,27 @@ export default function App() {
                       <button
                         key={p.name}
                         onClick={() => handleSelectPersona(p)}
-                        className={`p-2.5 border text-left flex items-center gap-2 transition-all rounded-none ${
+                        className={`p-2 border text-left flex items-center gap-2.5 transition-all rounded-none ${
                           isSelected
                             ? 'bg-oat border-espresso font-bold shadow-[2px_2px_0px_0px_rgba(45,41,38,1)]'
                             : 'bg-cream border-espresso/20 hover:bg-oat/30'
                         }`}
                       >
-                        <div 
-                          className="w-3.5 h-3.5 rounded-none flex-shrink-0" 
-                          style={{ backgroundColor: p.color }}
-                        />
-                        <span className="font-mono text-xs text-espresso">{p.name}</span>
+                        <div className="relative w-8 h-8 rounded-none border border-espresso flex-shrink-0 overflow-hidden">
+                          <img 
+                            src={p.avatarUrl} 
+                            alt={p.name} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
+                            }}
+                          />
+                          <div 
+                            className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-none border-t border-l border-espresso" 
+                            style={{ backgroundColor: p.color }}
+                          />
+                        </div>
+                        <span className="font-mono text-[10px] leading-tight text-espresso">{p.name}</span>
                       </button>
                     );
                   })}

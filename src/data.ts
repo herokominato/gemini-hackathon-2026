@@ -142,27 +142,27 @@ export const COFFEE_PERSONAS: Persona[] = [
   {
     name: 'Hero (Flat White)',
     color: '#D4A373',
-    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/hero.png'
+    avatarUrl: '/src/assets/images/hero.png'
   },
   {
     name: 'Faustin (Cortado)',
     color: '#C68B59',
-    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/Faustin.webp'
+    avatarUrl: '/src/assets/images/faustin.webp'
   },
   {
     name: 'Tanapol (Espresso Tonic)',
     color: '#5B4B3E',
-    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/Tanapol.webp'
+    avatarUrl: '/src/assets/images/tanapol.webp'
   },
   {
     name: 'Aish (Matcha Latte)',
     color: '#768959',
-    avatarUrl: 'https://raw.githubusercontent.com/herokominato/gemini-hackathon-2026/main/assets/aish.webp'
+    avatarUrl: '/src/assets/images/aish.webp'
   }
 ];
 
 export function getPersonaAvatar(personaName: string): string {
-  const p = COFFEE_PERSONAS.find(x => x.name === personaName);
+  const p = COFFEE_PERSONAS.find(x => x.name === personaName || x.name.toLowerCase().includes(personaName.toLowerCase()));
   return p?.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
 }
 

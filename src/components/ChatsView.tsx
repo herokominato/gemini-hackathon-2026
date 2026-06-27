@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, Send, Clock, Trash2, ArrowLeft, Coffee, Sparkles, MapPin } from 'lucide-react';
 import { ChatRoom, ChatMessage } from '../types';
+import { getPersonaAvatar } from '../data';
 
 interface ChatsViewProps {
   rooms: ChatRoom[];
@@ -251,11 +252,20 @@ export default function ChatsView({
                     key={msg.id}
                     className={`flex flex-col max-w-[80%] ${isMe ? 'self-end items-end' : 'self-start items-start'}`}
                   >
-                    {/* Persona label */}
-                    <span className="text-[8px] font-mono text-espresso/45 mb-1 flex items-center gap-1">
-                      {!isMe && <Coffee className="w-2.5 h-2.5 text-gold" />}
-                      {msg.senderPersona}
-                    </span>
+                    {/* Persona label & Avatar */}
+                    <div className={`flex items-center gap-1.5 mb-1 ${isMe ? 'flex-row-reverse' : 'flex-row'}`}>
+                      <img 
+                        src={getPersonaAvatar(msg.senderPersona)} 
+                        alt={msg.senderPersona} 
+                        className="w-4 h-4 object-cover border border-espresso rounded-none"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
+                        }}
+                      />
+                      <span className="text-[8.5px] font-mono text-espresso/50">
+                        {msg.senderPersona}
+                      </span>
+                    </div>
 
                     {/* Chat Bubble */}
                     <div

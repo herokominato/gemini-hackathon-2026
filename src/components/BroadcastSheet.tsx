@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Coffee, MapPin, Clock, PenTool, Check, AlertTriangle, ChevronRight, HelpCircle } from 'lucide-react';
 import { CoffeeShop, UserStatus } from '../types';
-import { VERIFIED_HANGOUTS, NEIGHBORHOODS } from '../data';
+import { VERIFIED_HANGOUTS, NEIGHBORHOODS, getPersonaAvatar } from '../data';
 
 interface BroadcastSheetProps {
   currentPersona: { name: string; color: string };
@@ -153,11 +153,21 @@ export default function BroadcastSheet({
           <div className="p-5 overflow-y-auto flex flex-col gap-4">
             <div className="bg-oat border border-espresso p-4">
               <div className="flex justify-between items-start mb-3">
-                <div className="flex items-center gap-2">
-                  <div 
-                    className="w-4 h-4 rounded-none border border-espresso" 
-                    style={{ backgroundColor: activeBroadcast.personaColor }}
-                  />
+                <div className="flex items-center gap-2.5">
+                  <div className="relative w-9 h-9 rounded-none border border-espresso overflow-hidden bg-cream flex-shrink-0">
+                    <img 
+                      src={getPersonaAvatar(activeBroadcast.personaName)} 
+                      alt={activeBroadcast.personaName} 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
+                      }}
+                    />
+                    <div 
+                      className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-none border-t border-l border-espresso" 
+                      style={{ backgroundColor: activeBroadcast.personaColor }}
+                    />
+                  </div>
                   <div>
                     <h4 className="editorial text-lg font-bold text-espresso leading-none">{activeBroadcast.personaName}</h4>
                     <p className="text-[9px] text-espresso/50 font-mono uppercase tracking-widest mt-0.5">Active Broadcast</p>

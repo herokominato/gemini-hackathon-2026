@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Coffee, MapPin, Sparkles, RefreshCw } from 'lucide-react';
-import { COFFEE_PERSONAS } from '../data';
+import { COFFEE_PERSONAS, getPersonaAvatar } from '../data';
 
 interface HeaderProps {
   currentPersona: { name: string; color: string };
@@ -34,13 +34,23 @@ export default function Header({ currentPersona, onChangePersona, onRefresh, isR
 
         <button
           onClick={onChangePersona}
-          className="flex items-center gap-1.5 px-2 py-1 bg-oat border-2 border-espresso text-[9px] font-mono hover:bg-espresso hover:text-cream transition-all duration-150 active:translate-y-px shadow-[1.5px_1.5px_0px_0px_rgba(45,41,38,1)] hover:shadow-none"
+          className="flex items-center gap-2 px-2.5 py-1 bg-oat border-2 border-espresso text-[9.5px] font-mono hover:bg-espresso hover:text-cream transition-all duration-150 active:translate-y-px shadow-[1.5px_1.5px_0px_0px_rgba(45,41,38,1)] hover:shadow-none"
           id="header-persona-btn"
         >
-          <div 
-            className="w-1.5 h-1.5 rounded-none" 
-            style={{ backgroundColor: currentPersona.color }} 
-          />
+          <div className="relative w-5 h-5 rounded-none border border-espresso flex-shrink-0 overflow-hidden bg-cream">
+            <img 
+              src={getPersonaAvatar(currentPersona.name)} 
+              alt={currentPersona.name} 
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
+              }}
+            />
+            <div 
+              className="absolute bottom-0 right-0 w-1.5 h-1.5 rounded-none" 
+              style={{ backgroundColor: currentPersona.color }} 
+            />
+          </div>
           <span className="font-semibold uppercase tracking-wider text-[8.5px]">{currentPersona.name}</span>
           <Sparkles className="w-2.5 h-2.5 text-gold" />
         </button>

@@ -302,7 +302,7 @@ export default function RadarMap({
               defaultZoom={13}
               gestureHandling="cooperative"
               options={mapOptions}
-              mapId="ce283082d31e12c959c61c2f"
+              mapId="7f1b11d01cc96456877c532c"
               internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
               style={{ width: '100%', height: '100%' }}
             >
@@ -380,6 +380,9 @@ export default function RadarMap({
                           alt={status.personaName}
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
+                          }}
                         />
 
                         {/* Micro active activity square */}
@@ -474,6 +477,9 @@ export default function RadarMap({
                       alt={status.personaName}
                       className="w-full h-full object-cover animate-fade-in"
                       referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
+                      }}
                     />
 
                     {/* Micro active activity square */}
@@ -557,6 +563,9 @@ export default function RadarMap({
                   src={getPersonaAvatar(selectedStatus.personaName)}
                   alt={selectedStatus.personaName}
                   className="w-6 h-6 object-cover border border-espresso rounded-none"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80';
+                  }}
                 />
                 <span className="font-serif text-lg font-bold text-espresso">
                   {selectedStatus.personaName}
